@@ -5,6 +5,11 @@ const { Router } = require('express');
 
 const router = Router();
 
+router.get("/alguna", (req,resp)=>{
+resp.json({message: "hola"})
+
+})
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
