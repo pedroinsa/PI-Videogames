@@ -11,7 +11,9 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
+      allowNull: false,
+
     },
     description: {
       type: DataTypes.STRING,
@@ -22,12 +24,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     released: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
 
    platforms: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.JSON),
     allowNull: false,
   }
     
