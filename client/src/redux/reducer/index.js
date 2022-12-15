@@ -1,6 +1,7 @@
 import {
     GET_ALL_VIDEOGAMES,
     GET_VIDEOGAME_DETAILS,
+    GET_VIDEOGAMES,
     CREATE_VIDEOGAME,
     GET_GENRE,
  } from "../actions";
@@ -19,6 +20,8 @@ import {
        return{...state, videogames: action.payload}
     case GET_VIDEOGAME_DETAILS:
        return {...state,videoGameDetail: action.payload}
+    case GET_VIDEOGAMES: 
+    return {...state, videogames:action.payload }   
    //  case CREATE_BANDS:
    //     return{...state, bands: [...state.bands, action.payload]}
    //  case DELETE_BANDS:

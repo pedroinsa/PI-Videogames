@@ -1,7 +1,7 @@
 import React from 'react';
-import Searchbar from './Searcbar/Searchbar.jsx'
-import Container from './Container/Container.jsv';
-import Navbar from './Navbar/Navbar.jsx';
+import Searchbar from '../Searchbar/Searchbar.jsx'
+import Container from '../Container/Container.jsx';
+import Navbar from '../Navbar/Navbar.jsx';
 import './Home.css';
 
 class Home extends React.Component{
@@ -13,6 +13,7 @@ constructor(props){
 render(){
     return (
         <div className='home'>
+            <Navbar/>
             <Searchbar/>
             <Container/>
             <h1>SOY EL HOME</h1>
