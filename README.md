@@ -139,7 +139,7 @@ __Ruta de creación de videojuegos__: debe contener
   - Nombre
   - Descripción
   - Fecha de lanzamiento
-  - Rating
+  - Ratingn
 - [ ] Posibilidad de seleccionar/agregar varios géneros
 - [ ] Posibilidad de seleccionar/agregar varias plataformas
 - [ ] Botón/Opción para crear un nuevo videojuego
