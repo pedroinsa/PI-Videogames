@@ -1,8 +1,8 @@
 .home {
-  background-color: red;
+  background-color: pink;
   display: flex;
   flex-direction: column;
-  padding-top: 5%;
-  width: 95%;
-  margin: 20px;
+  width: 100%;
+  margin: 0px;
+  height: 600px;
 }

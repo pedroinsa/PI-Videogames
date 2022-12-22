@@ -8,7 +8,7 @@ import {
  
  const initialState = {
     videogames: [],
-    videoGameDetail: {},
+    videogameDetail: {},
  };
  
 
@@ -19,14 +19,14 @@ import {
     case GET_ALL_VIDEOGAMES:
        return{...state, videogames: action.payload}
     case GET_VIDEOGAME_DETAILS:
-       return {...state,videoGameDetail: action.payload}
+       return {...state,videogameDetail: action.payload}
     case GET_VIDEOGAMES: 
     return {...state, videogames:action.payload }   
    //  case CREATE_BANDS:
    //     return{...state, bands: [...state.bands, action.payload]}
    //  case DELETE_BANDS:
    //         return{...state, bands: state.bands.filter(elem=> elem.id !== action.payload)}
-   //  default: return state
+    default: return state
    }
  };
  
