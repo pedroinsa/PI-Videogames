@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Searchbar from '../Searchbar/Searchbar.jsx'
 import Container from '../Container/Container.jsx';
 import Paginado from "../Paginado/Paginado.jsx"
+import Videocard from '../Videocard/Videocard.jsx';
 
 import Navbar from '../Navbar/Navbar.jsx';
 import * as actions from '../../redux/actions/index'
@@ -12,8 +13,9 @@ import './Home.css';
 function Home (props) {
  const dispatch = useDispatch()
  const allVideogames= useSelector(state=>state.videogames)
+ const [videogamesPerPage, setVideogamesPerPage] = React.useState(15)
  const [currentPage, setCurrentPage] = React.useState(1)
- const [videogamesPerPage, setVideogamesPerPage] = React.useEffect(15)
+
  const indexLast = currentPage *videogamesPerPage
  const indexFirst = indexLast - videogamesPerPage
  const currentVideogames = allVideogames.slice(indexFirst,indexLast)
@@ -52,7 +54,11 @@ function Home (props) {
                 </select>
                 <button>Ordenar!</button>
             </form>
-            {/* <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/> */}
+            {allVideogames.length}
+            {"hola"}
+            {currentVideogames.length}
+            {currentVideogames.length && currentVideogames.map(x=><Videocard key={x.id} name={x.name} genres={x.genres}/>)}
+            <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
            
         </div>
     )
