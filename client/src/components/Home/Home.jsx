@@ -20,10 +20,13 @@ function Home (props) {
  const indexFirst = indexLast - videogamesPerPage
  const currentVideogames = allVideogames.slice(indexFirst,indexLast)
  const paginado = (pageNumber)=>{ setCurrentPage(pageNumber)} 
-
+ function handlerInput(e){
+    dispatch(actions.filterByOrigin(e.target.value))
+}
 
  React.useEffect(()=>{
      dispatch(actions.getAllVideogames())
+    //  dispatch(actions.getGenre())
  },[])
 
 
@@ -31,33 +34,36 @@ function Home (props) {
         <div className='home'>
             <Navbar/>
             <Searchbar/>
-            <form>
+            <div>
                 <label>Origen</label>
-                <select>
-                    <option value="">Videojuegos API</option>
-                    <option value="">Personalizados</option>
+                <select onChange={(e)=>handlerInput(e)}>
+                    <option value="all">Todos</option>
+                    <option value="Api">Videojuegos API</option>
+                    <option value="createdInDb">Personalizados</option>
                 </select>
-                <button>Filtrar!</button>
-            </form>
-            <form>
+                </div>
+               <div>
                 <label>Por genero</label>
                 <select>
+                
 
                 </select>
-                <button>Filtrar</button>
-            </form>
-            <form>
+                </div>
+        
+            <div>
                 <label>Alfabetico</label>
                 <select>
-                    <option value="">A-Z</option>
-                    <option value="">Z-A</option>
+                    <option value="">Seleccionar </option>
+                    <option value="Descendente">A-Z</option>
+                    <option value="Ascendente">Z-A</option>
                 </select>
-                <button>Ordenar!</button>
-            </form>
-            {allVideogames.length}
+            </div>
+            {!allVideogames.length && <h2>Loading...</h2>}
             {"hola"}
             {currentVideogames.length}
-            {currentVideogames.length && currentVideogames.map(x=><Videocard key={x.id} name={x.name} genres={x.genres}/>)}
+            <div className='videocards'>
+            {currentVideogames.length && currentVideogames.map(x=><Videocard className="videocard" key={x.id} name={x.name} genres={x.genres}/>)}
+            </div>
             <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
            
         </div>

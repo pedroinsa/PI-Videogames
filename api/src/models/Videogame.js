@@ -31,8 +31,12 @@ module.exports = (sequelize) => {
    platforms: {
     type: DataTypes.ARRAY(DataTypes.JSON),
     allowNull: false,
+  },
+  createdInDb:{
+   type: DataTypes.BOOLEAN,
+   allowNull: false,
+   defaultValue: true
   }
-    
     
     
   }, {timestamps: false});
