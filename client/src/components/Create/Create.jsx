@@ -3,17 +3,18 @@ import Navbar from '../Navbar/Navbar';
 import "./Create.css"
 
 function Create (props){
+const [input, setInput] = React.useState({name:"", description:"",released:"", rating: 0})        
 
 return (<div>
         <Navbar/>
         <h2>CREA TU PROPIO VIDEOJUEGO!</h2>
         <form > 
            <label>Name:</label>
-           <input/>
+           <input type="text"/>
            <label>Description:</label>
-           <input/>
+           <input type="text"/>
            <label>Released:</label>
-           <input/>
+           <input type="text"/>
            <label>Rating:</label>
            <select>
                   <option value ="1">1</option> 

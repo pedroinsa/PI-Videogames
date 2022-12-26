@@ -4,16 +4,20 @@ import {
     GET_VIDEOGAMES,
     CREATE_VIDEOGAME,
     GET_GENRE,
-    FILTER_BY_ORIGIN
+    FILTER_BY_ORIGIN,
+    FILTER_BY_GENRE,
+    SORT_OF_LIST
  } from "../actions";
+ import { compareAZ,compareZA,compareRating, compareID } from "./funciones";
  
  const initialState = {
     videogames: [],
     videogamesComplete: [],
     videogameDetail: {},
+    genres: []
  };
  
-
+//  arg.forEach(elem=> elem.platforms.forEach(x=> array.push(x.platform.name)))
  
  const rootReducer = (state = initialState, action) => {
    // eslint-disable-next-line default-case
@@ -33,6 +37,25 @@ import {
         else if(action.payload === "Api") {filtrado = allgames.filter(e=> !e.createdInDb)
         }
         return{...state, videogames: filtrado}
+      case GET_GENRE :
+         return{...state, genres: action.payload}
+      case FILTER_BY_GENRE:
+       let allVideogames2 = state.videogamesComplete 
+       let filter =  allVideogames2.filter(x=> x.generos.some(x=> x.id== action.payload))
+       return{...state, videogames: filter}
+       case SORT_OF_LIST:
+          let byOrder
+          if(action.payload ==="indistinto"){
+             byOrder = state.videogames.sort(compareID)
+          }else if(action.payload === "Descendente"){
+             byOrder = state.videogames.sort(compareAZ)
+          }else if(action.payload === "Ascendente"){
+             byOrder = state.videogames.sort(compareZA)
+          }else if(action.payload === "Rating"){
+             byOrder= state.videogames.sort(compareRating)
+          }
+          return{...state, videogames: byOrder}
+          
     
    //  case CREATE_BANDS:
    //     return{...state, bands: [...state.bands, action.payload]}

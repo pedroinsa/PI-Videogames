@@ -13,9 +13,10 @@ import './Home.css';
 function Home (props) {
  const dispatch = useDispatch()
  const allVideogames= useSelector(state=>state.videogames)
+ const allGenres= useSelector(state=>state.genres)
  const [videogamesPerPage, setVideogamesPerPage] = React.useState(15)
  const [currentPage, setCurrentPage] = React.useState(1)
-
+ const [order, setOrder]= React.useState("indistinto")
  const indexLast = currentPage *videogamesPerPage
  const indexFirst = indexLast - videogamesPerPage
  const currentVideogames = allVideogames.slice(indexFirst,indexLast)
@@ -23,10 +24,18 @@ function Home (props) {
  function handlerInput(e){
     dispatch(actions.filterByOrigin(e.target.value))
 }
+function handlerInputGenre(e){
+    dispatch(actions.filterByGenre(e.target.value))
+}
+function handlerInputOrder(e){
+    dispatch(actions.sortOfList(e.target.value))
+    setCurrentPage(1)
+    setOrder(`Order ${e.target.value}`)
+}
 
  React.useEffect(()=>{
      dispatch(actions.getAllVideogames())
-    //  dispatch(actions.getGenre())
+  
  },[])
 
 
@@ -44,18 +53,19 @@ function Home (props) {
                 </div>
                <div>
                 <label>Por genero</label>
-                <select>
-                
+                <select onChange={(e)=> handlerInputGenre(e)}>
+                {allGenres && allGenres.map(x=> <option value={x.id}>{x.name}</option>)}
 
                 </select>
                 </div>
         
             <div>
                 <label>Alfabetico</label>
-                <select>
-                    <option value="">Seleccionar </option>
+                <select onChange={(e)=>handlerInputOrder(e)}>
+                    <option value="indistinto">Indistinto </option>
                     <option value="Descendente">A-Z</option>
                     <option value="Ascendente">Z-A</option>
+                    <option value ="Rating">Rating</option>
                 </select>
             </div>
             {!allVideogames.length && <h2>Loading...</h2>}

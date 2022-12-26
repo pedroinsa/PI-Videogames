@@ -26,11 +26,13 @@ router.get("/videogames", async (req,res)=>{
      const axiosReq = await axios.get(url)
     axiosReq.data.results.forEach(x=>{
         const obj = {
+    
             name : x.name,
             id: x.id,
             released: x.released,
             rating: x.rating,
-            platforms: x.platforms
+            platforms: x.platforms,
+            generos: x.genres.map(x=>{return {id: x.id, name: x.name}})
         }
         array.push(obj)
     }) 
@@ -117,7 +119,7 @@ router.get("/genres", async(req,res)=>{
   })
   await Genero.bulkCreate(mapeo)
 
-  res.json({msg: "success"})
+  res.json(mapeo)
 
 })
 
