@@ -94,8 +94,8 @@ router.post("/videogames", async (req,res)=>{
      if(!name || !description || !released || !rating ||!platforms) throw Error("Faltan campos esenciales")
     if(typeof released !== "string") throw Error("Relesed deber ser un string")
     if(typeof rating !=="number") throw Error("Rating deber ser un numero")
-    if(typeof platforms !== "object" && !Array.isArray(platforms)) throw Error("Platforms deber ser un array")
-    if(typeof generos !== "object" && !Array.isArray(generos)) throw Error("Platforms deber ser un array")
+    if(typeof platforms !== "object" && !Array.isArray(platforms)) throw Error("platforms deber ser un array")
+    if(typeof generos !== "object" && !Array.isArray(generos)) throw Error("generos deber ser un array")
     const obj = {name,description,released,rating,platforms}
     const db = await Videogame.create(obj)
     db.addGeneros(generos)

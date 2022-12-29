@@ -33,9 +33,9 @@ function handlerInputOrder(e){
     setOrder(`Order ${e.target.value}`)
 }
 
- React.useEffect(()=>{
-     dispatch(actions.getAllVideogames())
-  
+ React.useEffect(async ()=>{
+    await dispatch(actions.getAllVideogames())
+    dispatch(actions.getPlatforms())
  },[])
 
 
@@ -69,8 +69,7 @@ function handlerInputOrder(e){
                 </select>
             </div>
             {!allVideogames.length && <h2>Loading...</h2>}
-            {"hola"}
-            {currentVideogames.length}
+           
             <div className='videocards'>
             {currentVideogames.length && currentVideogames.map(x=><Videocard className="videocard" key={x.id} name={x.name} genres={x.genres}/>)}
             </div>

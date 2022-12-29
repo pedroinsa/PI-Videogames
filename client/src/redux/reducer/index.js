@@ -6,7 +6,8 @@ import {
     GET_GENRE,
     FILTER_BY_ORIGIN,
     FILTER_BY_GENRE,
-    SORT_OF_LIST
+    SORT_OF_LIST,
+    GET_PLATFORMS
  } from "../actions";
  import { compareAZ,compareZA,compareRating, compareID } from "./funciones";
  
@@ -14,7 +15,8 @@ import {
     videogames: [],
     videogamesComplete: [],
     videogameDetail: {},
-    genres: []
+    genres: [],
+    platforms: []
  };
  
 //  arg.forEach(elem=> elem.platforms.forEach(x=> array.push(x.platform.name)))
@@ -56,11 +58,16 @@ import {
           }
           return{...state, videogames: byOrder}
           
-    
-   //  case CREATE_BANDS:
-   //     return{...state, bands: [...state.bands, action.payload]}
-   //  case DELETE_BANDS:
-   //         return{...state, bands: state.bands.filter(elem=> elem.id !== action.payload)}
+    case GET_PLATFORMS:
+          let getAll = state.videogamesComplete
+          let array = []   
+          getAll.forEach(elem=> elem.platforms.forEach(x=> array.push(x.platform.name)))
+          const set = new Set(array)
+          let allPlatforms = Array.from(set)
+
+          return{...state, platforms: allPlatforms}   
+
+
     default: return state
    }
  };

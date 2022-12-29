@@ -7,6 +7,7 @@ export const GET_GENRE = 'GET_GENRE';
 export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN'
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE"
 export const SORT_OF_LIST = "SORT_OF_LIST"
+export const GET_PLATFORMS = "GET_PLATFORMS"
 
 
 export const getAllVideogames = () => dispatch=> fetch('http://localhost:3001/videogames')
@@ -26,9 +27,8 @@ export const getVideogameDetails = (id) => dispatch => fetch(`http://localhost:3
 .then(data=> dispatch({type: GET_VIDEOGAME_DETAILS, payload: data}))
 .catch(e=> console.log(e))
 
-export const createVideogame =  (input)=> async(dispatch) =>{
-    await axios.post("http://localhost:3001/videogames", input)
-}
+export const createVideogame =  (input)=> async (dispatch) =>
+  await axios.post("http://localhost:3001/videogames", input)
 
 export const getGenre = () => dispatch => fetch('http://localhost:3001/genres')
 .then(data=> data.json()).then(data=> dispatch({type: GET_GENRE, payload: data}))
@@ -37,3 +37,5 @@ export const filterByOrigin=(origin)=>{return {type: FILTER_BY_ORIGIN, payload: 
 export const filterByGenre = (payload)=>{return {type: FILTER_BY_GENRE, payload}}
 
 export const sortOfList = (payload) => {return {type: SORT_OF_LIST, payload}}
+
+export const getPlatforms=()=>{return {type: GET_PLATFORMS}} 
