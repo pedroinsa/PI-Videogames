@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Searchbar from '../Searchbar/Searchbar.jsx'
 import Container from '../Container/Container.jsx';
 import Paginado from "../Paginado/Paginado.jsx"
@@ -71,7 +72,7 @@ function handlerInputOrder(e){
             {!allVideogames.length && <h2>Loading...</h2>}
            
             <div className='videocards'>
-            {currentVideogames.length && currentVideogames.map(x=><Videocard className="videocard" key={x.id} name={x.name} genres={x.genres}/>)}
+            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard className="videocard" key={x.id} name={x.name} genres={x.genres}/></Link>)}
             </div>
             <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
            

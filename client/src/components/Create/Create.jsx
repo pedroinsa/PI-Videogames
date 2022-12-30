@@ -14,22 +14,46 @@ const platforms = useSelector(state=> state.platforms)
 const genres = useSelector(state=> state.genres)   
 function handlerInput(e){
         setInput({...input, [e.target.name]: e.target.value})
+        setError(validate({...input,[e.target.name]: e.target.value}))
 }
 function handlerInputRating(e){
         setInput({...input, [e.target.name]: parseInt(e.target.value)})
+        setError(validate({...input, [e.target.name]: parseInt(e.target.value)}))
 }
 function handlerSelectOptions(e){
         setInput({...input, [e.target.name]: Array.from(e.target.selectedOptions, (elem) =>{return{platform: {name: elem.value }}})})
+        setError(validate({...input, [e.target.name]: Array.from(e.target.selectedOptions, (elem) =>{return{platform: {name: elem.value }}})}))
 }
 function handlerSelectOptions2(e){
         setInput({...input, [e.target.name]: Array.from(e.target.selectedOptions, (elem) => parseInt(elem.value))})
+        setError(validate({...input, [e.target.name]: Array.from(e.target.selectedOptions, (elem) => parseInt(elem.value))}))
 }
 function handlerSubmit(e){
         e.preventDefault()
-        dispatch(actions.createVideogame(input))
+       if(!error.name || !error.description || !error.released || !error.rating || !error.platforms || !error.generos ) dispatch(actions.createVideogame(input))
 }
 function validate(input){
-
+        const errores= {}
+if(!input.name.length){
+     errores.name = "Debe proporcionar un nombre"
+  }else if(input.name.length < 4 || input.name.length > 20){
+   errores.name = "El nombre debe tener entre 4 y 20 caracteres"
+  } else if(!input.description){
+         errores.description = "Debe proporcionar una descripcion" 
+  }else if(input.description.length < 10 || input.description.length > 50){
+        errores.description = "La descripcion deber tener entre 10 y 50 caracteres"
+  }else if(input.released.length <10 || input.released.length >10){
+          errores.released = "Debe ingresar una fecha correcta"
+  }else if(parseInt(input.released.slice(0,4))> 2022 || parseInt(input.released.slice(0,4))<1985){
+          errores.released = "Debe ingresar un año valido"
+  }else if(input.rating <1 || input.rating> 10){
+          errores.rating = "El rango del rating es de 1 a 10"
+  }else if(!input.platforms.length){
+          errores.platforms = "Platforms debe tener al menos un item"
+  }else if(!input.generos.length){
+        errores.generos = "Generos debe tener al menos un item"
+ }
+ return errores
 }
 return (<div>
         <Navbar/>
@@ -61,7 +85,14 @@ return (<div>
           <select  onChange={handlerSelectOptions2} name="generos" multiple={true}>
                {genres && genres.map(elem=> <option key={elem.id} value={elem.id}>{elem.name}</option>)}
           </select>
-         
+          {error.name && <p>{error.name}</p>}
+       {error.description &&  <p>{error.description}</p>}
+       {error.released && <p>{error.released}</p>}
+       {error.rating && <p>{error.rating}</p>}
+       {error.platforms && <p>{error.platforms}</p>}
+       {error.generos && <p>{error.generos}</p>}
+
+
            <button>Crear!</button>
         </form>
         </div>

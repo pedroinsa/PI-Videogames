@@ -2,6 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import * as actions from '../../redux/actions/index'
+import Navbar from '../Navbar/Navbar';
 
 function Detail (){
     const {id} = useParams()
@@ -12,6 +13,7 @@ dispatch(actions.getVideogameDetails(id))
 const detail = useSelector(state=> state.videogameDetail)
 
 return(<div>
+    <Navbar/>
     <h1>{detail.name}</h1>
     <img src={detail.image} alt="imagen-videogame"/>
     <h3>Description: {detail.description}</h3>

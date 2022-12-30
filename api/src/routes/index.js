@@ -49,7 +49,7 @@ if(!name){
     res.status(201).json(quince)
 }      
 } catch (error) {
-    res.status(400).json({error: error.message})
+    res.status(404).json([])
 }
 })
 router.get("/videogame/:id", async(req,res)=>{
