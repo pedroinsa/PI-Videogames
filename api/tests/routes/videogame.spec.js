@@ -7,6 +7,11 @@ const { Videogame, conn } = require('../../src/db.js');
 const agent = session(app);
 const videogame = {
   name: 'Super Mario Bros',
+  rating: 4,
+  platforms: [],
+  released: "2020-11-11",
+  description: "es un juego muy popular de verdad"
+  
 };
 
 describe('Videogame routes', () => {

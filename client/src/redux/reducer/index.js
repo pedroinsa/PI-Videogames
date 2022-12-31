@@ -7,7 +7,8 @@ import {
     FILTER_BY_ORIGIN,
     FILTER_BY_GENRE,
     SORT_OF_LIST,
-    GET_PLATFORMS
+    GET_PLATFORMS,
+    CLEAN_DETAIL
  } from "../actions";
  import { compareAZ,compareZA,compareRating, compareID } from "./funciones";
  
@@ -66,7 +67,8 @@ import {
           let allPlatforms = Array.from(set)
 
           return{...state, platforms: allPlatforms}   
-
+     case CLEAN_DETAIL:
+        return {...state, videogameDetail: {}}
 
     default: return state
    }

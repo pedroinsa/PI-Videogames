@@ -24,9 +24,11 @@ function Home (props) {
  const paginado = (pageNumber)=>{ setCurrentPage(pageNumber)} 
  function handlerInput(e){
     dispatch(actions.filterByOrigin(e.target.value))
+    setCurrentPage(1)
 }
 function handlerInputGenre(e){
     dispatch(actions.filterByGenre(e.target.value))
+    setCurrentPage(1)
 }
 function handlerInputOrder(e){
     dispatch(actions.sortOfList(e.target.value))
@@ -72,7 +74,7 @@ function handlerInputOrder(e){
             {!allVideogames.length && <h2>Loading...</h2>}
            
             <div className='videocards'>
-            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard className="videocard" key={x.id} name={x.name} genres={x.genres}/></Link>)}
+            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard className="videocard" key={x.id}  image={x.image} name={x.name} genres={x.genres}/></Link>)}
             </div>
             <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
            

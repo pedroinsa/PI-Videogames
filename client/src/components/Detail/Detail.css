@@ -1,0 +1,9 @@
+.detail img {
+  width: 70%;
+  height: 70%;
+}
+.detail ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

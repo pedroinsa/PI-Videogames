@@ -9,10 +9,7 @@ const APIKEY = '427f786c4ce944fa906583a7f5705e9b'
 const url = `https://api.rawg.io/api/games?key=${APIKEY}`
 const router = Router();
 
-router.get("/alguna", (req,resp)=>{
-resp.json({message: "hola"})
 
-})
 router.get("/videogames", async (req,res)=>{
     // const resp = await axios.get(`https://api.rawg.io/api/games/7?key=${APIKEY}`)
     // res.json(resp.data)
@@ -32,6 +29,7 @@ router.get("/videogames", async (req,res)=>{
             released: x.released,
             rating: x.rating,
             platforms: x.platforms,
+            image: x.background_image,
             generos: x.genres.map(x=>{return {id: x.id, name: x.name}})
         }
         array.push(obj)

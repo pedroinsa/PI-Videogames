@@ -8,6 +8,7 @@ export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN'
 export const FILTER_BY_GENRE = "FILTER_BY_GENRE"
 export const SORT_OF_LIST = "SORT_OF_LIST"
 export const GET_PLATFORMS = "GET_PLATFORMS"
+export const CLEAN_DETAIL = "CLEAN_DETAIL"
 
 
 export const getAllVideogames = () => dispatch=> fetch('http://localhost:3001/videogames')
@@ -39,3 +40,6 @@ export const filterByGenre = (payload)=>{return {type: FILTER_BY_GENRE, payload}
 export const sortOfList = (payload) => {return {type: SORT_OF_LIST, payload}}
 
 export const getPlatforms=()=>{return {type: GET_PLATFORMS}} 
+
+export const cleanDetail = ()=>{return {type: CLEAN_DETAIL  }}
+

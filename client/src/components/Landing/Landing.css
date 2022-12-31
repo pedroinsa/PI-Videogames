@@ -1,7 +1,7 @@
 .landing button {
   width: 150%;
-  background-color: purple;
-  color: white;
+  background-color: rgb(161, 124, 182);
+  color: purple;
   height: 90px;
   font-size: 3.5rem;
   border-radius: 15%;
@@ -28,8 +28,8 @@
   display: flex;
 }
 .landing button:hover {
-  background-color: rgb(161, 124, 182);
-  color: purple;
+  background-color: purple;
+  color: white;
   transform: scale(1.1);
   border: 2px solid purple;
 }
