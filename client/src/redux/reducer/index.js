@@ -8,7 +8,8 @@ import {
     FILTER_BY_GENRE,
     SORT_OF_LIST,
     GET_PLATFORMS,
-    CLEAN_DETAIL
+    CLEAN_DETAIL,
+    CLEAN_ALL
  } from "../actions";
  import { compareAZ,compareZA,compareRating, compareID } from "./funciones";
  
@@ -69,6 +70,9 @@ import {
           return{...state, platforms: allPlatforms}   
      case CLEAN_DETAIL:
         return {...state, videogameDetail: {}}
+     case CLEAN_ALL:
+        return{...state, videogames: [], videogamesComplete: []}   
+        
 
     default: return state
    }

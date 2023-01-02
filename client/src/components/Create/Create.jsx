@@ -30,7 +30,7 @@ function handlerSelectOptions2(e){
 }
 function handlerSubmit(e){
         e.preventDefault()
-       if(!error.name || !error.description || !error.released || !error.rating || !error.platforms || !error.generos ) dispatch(actions.createVideogame(input))
+       if(input.name.length && !error.name && !error.description && !error.released && !error.rating && !error.platforms && !error.generos ) dispatch(actions.createVideogame(input))
 }
 function validate(input){
         const errores= {}
@@ -59,11 +59,11 @@ return (<div>
         <Navbar/>
         <h2>CREA TU PROPIO VIDEOJUEGO!</h2>
         <form onSubmit={handlerSubmit} > 
-           <label>Name:</label>
+           <label>Nombre:</label>
            <input onChange={handlerInput} name="name" type="text" />
-           <label>Description:</label>
+           <label>Descripcion:</label>
            <input onChange={handlerInput} name= "description" type="text"/>
-           <label>Released:</label>
+           <label>Lanzamiento:</label>
            <input onChange={handlerInput} name="released" type="date" />
            <label>Rating:</label>
            <select name="rating"  onChange={handlerInputRating}>
@@ -78,10 +78,12 @@ return (<div>
                   <option value ="9">9</option> 
                   <option value ="10">10</option> 
            </select>
+           <label>Plataformas: </label>
           <select onChange={handlerSelectOptions} name="platforms" multiple={true}>
                   {platforms && platforms.map(x=> <option key={x} value={x}>{x}</option>)}
 
           </select>
+          <label>Generos:</label>
           <select  onChange={handlerSelectOptions2} name="generos" multiple={true}>
                {genres && genres.map(elem=> <option key={elem.id} value={elem.id}>{elem.name}</option>)}
           </select>
@@ -93,7 +95,7 @@ return (<div>
        {error.generos && <p>{error.generos}</p>}
 
 
-           <button>Crear!</button>
+           <button disabled={!input.name.length ||error.name || error.description || error.released || error.rating || error.platforms || error.generos}>Crear!</button>
         </form>
         </div>
                 )

@@ -4,7 +4,7 @@
   flex-direction: column;
   width: 100%;
   margin: 0px;
-  height: 600px;
+  height: 100%;
 }
 .videocards {
   display: flex;
@@ -12,7 +12,13 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.videocards a {
+  text-decoration: none;
+  color: purple;
+  width: 33%;
+}
 
-.videocard {
-  background-color: red;
+.videocards a:hover {
+  background-color: purple;
+  color: white;
 }

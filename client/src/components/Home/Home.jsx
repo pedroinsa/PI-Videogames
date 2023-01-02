@@ -39,6 +39,7 @@ function handlerInputOrder(e){
  React.useEffect(async ()=>{
     await dispatch(actions.getAllVideogames())
     dispatch(actions.getPlatforms())
+    return ()=> dispatch(actions.cleanAll())
  },[])
 
 
@@ -74,7 +75,7 @@ function handlerInputOrder(e){
             {!allVideogames.length && <h2>Loading...</h2>}
            
             <div className='videocards'>
-            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard className="videocard" key={x.id}  image={x.image} name={x.name} genres={x.genres}/></Link>)}
+            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard key={x.id}  image={x.image} name={x.name} genres={x.generos}/></Link>)}
             </div>
             <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
            

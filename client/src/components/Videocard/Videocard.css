@@ -1,0 +1,8 @@
+.videocard img {
+  width: 50%;
+  height: 120px;
+}
+.videocard {
+  border: 1px solid purple;
+  width: 99%;
+}
