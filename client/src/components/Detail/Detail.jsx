@@ -19,14 +19,15 @@ return(<div className='detail'>
     <Navbar/>
     {detail.name ? <h1>{detail.name}</h1>: <h1>Loading</h1>}
     {detail.image && <img src={detail.image} alt="imagen-videogame"/>}
-    {detail.description && <h3>Description: {detail.description}</h3>}
-    {detail.released && <h3>Released: {detail.released}</h3> }
-    {detail.rating  && <h3>Rating: {detail.rating}</h3> }
-    {detail.platforms && <h3>Platforms: </h3>}
+    {detail.description && <h4>Description: </h4>}
+    {detail.description && <p>{detail.description}</p>}
+    {detail.released && <h4>Released: {detail.released}</h4> }
+    {detail.rating  && <h4>Rating: {detail.rating}</h4> }
+    {detail.platforms && <h4>Platforms: </h4>}
     <ul>
         {detail.platforms && detail.platforms.map(element=> <li>{element.platform.name}</li> )}
     </ul>
-    {detail.genres && <h3>Genres: </h3> }
+    {detail.genres && <h4>Genres: </h4> }
     <ul>
         {detail.genres && detail.genres.map(element=> <li>{element.name}</li> )}
     </ul>

@@ -9,7 +9,8 @@ import {
     SORT_OF_LIST,
     GET_PLATFORMS,
     CLEAN_DETAIL,
-    CLEAN_ALL
+    CLEAN_ALL,
+    FILTER_PLATFORM
  } from "../actions";
  import { compareAZ,compareZA,compareRating, compareID } from "./funciones";
  
@@ -18,7 +19,8 @@ import {
     videogamesComplete: [],
     videogameDetail: {},
     genres: [],
-    platforms: []
+    platforms: [],
+    form: {}
  };
  
 //  arg.forEach(elem=> elem.platforms.forEach(x=> array.push(x.platform.name)))
@@ -40,13 +42,19 @@ import {
         }else if(action.payload === "all"){  filtrado = allgames}
         else if(action.payload === "Api") {filtrado = allgames.filter(e=> !e.createdInDb)
         }
-        return{...state, videogames: filtrado}
+       const error = {error: "No hay resultados"}
+        return{...state, videogames: filtrado.length? filtrado: [error]}
       case GET_GENRE :
          return{...state, genres: action.payload}
       case FILTER_BY_GENRE:
        let allVideogames2 = state.videogamesComplete 
-       let filter =  allVideogames2.filter(x=> x.generos.some(x=> x.id== action.payload))
-       return{...state, videogames: filter}
+       let filter
+       if(action.payload ==="all"){ filter= allVideogames2
+       }else{
+           filter =  allVideogames2.filter(x=> x.generos.some(x=> x.id== action.payload))
+       }
+       const errores = {error: "No hay resultados"}
+       return{...state, videogames: filter.length? filter: [errores]}
        case SORT_OF_LIST:
           let byOrder
           if(action.payload ==="indistinto"){
@@ -70,12 +78,13 @@ import {
           return{...state, platforms: allPlatforms}   
      case CLEAN_DETAIL:
         return {...state, videogameDetail: {}}
-     case CLEAN_ALL:
-        return{...state, videogames: [], videogamesComplete: []}   
-        
+     case CREATE_VIDEOGAME:
+        return{...state, form: action.payload}
+
 
     default: return state
    }
+
  };
  
  export default rootReducer;

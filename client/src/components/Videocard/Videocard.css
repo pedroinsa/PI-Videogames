@@ -5,4 +5,5 @@
 .videocard {
   border: 1px solid purple;
   width: 99%;
+  border-radius: 7%;
 }

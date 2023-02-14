@@ -1,5 +1,5 @@
 .home {
-  background-color: pink;
+  background-color: palevioletred;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,10 +15,14 @@
 .videocards a {
   text-decoration: none;
   color: purple;
-  width: 33%;
+  width: 30%;
+  background-color: pink;
+  border-radius: 7%;
+  margin-top: 3%;
 }
 
 .videocards a:hover {
   background-color: purple;
   color: white;
+  border-radius: 7%;
 }

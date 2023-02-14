@@ -18,11 +18,35 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const { conn, Genero } = require('./src/db.js');
 
+const axios = require('axios')
+const {
+   APIKEY
+  } = process.env;
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
+
+
+// conn.sync({ force: true }).then( async ()=> await precarga())
+// .then(()=>{  server.listen(3001, () => {
+//     console.log('%s listening at 3001'); // eslint-disable-line no-console
+//   });
+// })
+
+// async function precarga(){  
+// const getGenres = await axios(`https://api.rawg.io/api/genres?key=${APIKEY}`)
+// const data = getGenres.data.results
+// const mapeo = data.map(element=> {
+//     const obj = {
+//         id: element.id,
+//         name: element.name
+//     }
+//     return obj
+// })
+// await Genero.bulkCreate(mapeo)
+// }

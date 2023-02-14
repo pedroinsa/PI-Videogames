@@ -3,3 +3,7 @@
   flex-direction: column;
   justify-content: center;
 }
+.about p {
+  width: 80%;
+  margin-left: 10%;
+}

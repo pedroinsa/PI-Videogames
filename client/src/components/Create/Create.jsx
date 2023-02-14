@@ -11,7 +11,8 @@ const [input, setInput] = React.useState({name:"", description:"",released:"", r
 const [error, setError] = React.useState({})
 const dispatch = useDispatch()      
 const platforms = useSelector(state=> state.platforms)  
-const genres = useSelector(state=> state.genres)   
+const genres = useSelector(state=> state.genres)  
+const form = useSelector(state => state.form) 
 function handlerInput(e){
         setInput({...input, [e.target.name]: e.target.value})
         setError(validate({...input,[e.target.name]: e.target.value}))
@@ -55,18 +56,26 @@ if(!input.name.length){
  }
  return errores
 }
-return (<div>
+return (<div className> 
         <Navbar/>
-        <h2>CREA TU PROPIO VIDEOJUEGO!</h2>
+        <h1>CREA TU PROPIO VIDEOJUEGO!</h1>
         <form onSubmit={handlerSubmit} > 
+        <div className='createName'>
            <label>Nombre:</label>
            <input onChange={handlerInput} name="name" type="text" />
+         </div>
+         <div className='createDescription'>
            <label>Descripcion:</label>
            <input onChange={handlerInput} name= "description" type="text"/>
+         </div>  
+         <div className='createReleased'>
            <label>Lanzamiento:</label>
            <input onChange={handlerInput} name="released" type="date" />
+        </div>  
+       <div className='createRating'>
            <label>Rating:</label>
            <select name="rating"  onChange={handlerInputRating}>
+                   <option value="0">-</option>
                   <option value ="1">1</option> 
                   <option value ="2">2</option> 
                   <option value ="3">3</option> 
@@ -78,24 +87,31 @@ return (<div>
                   <option value ="9">9</option> 
                   <option value ="10">10</option> 
            </select>
+         </div>    
+         <div className='createPlatforms'>       
            <label>Plataformas: </label>
           <select onChange={handlerSelectOptions} name="platforms" multiple={true}>
                   {platforms && platforms.map(x=> <option key={x} value={x}>{x}</option>)}
 
           </select>
+         </div>  
+         <div className='createGenres'>
           <label>Generos:</label>
           <select  onChange={handlerSelectOptions2} name="generos" multiple={true}>
                {genres && genres.map(elem=> <option key={elem.id} value={elem.id}>{elem.name}</option>)}
           </select>
+         </div>  
           {error.name && <p>{error.name}</p>}
        {error.description &&  <p>{error.description}</p>}
        {error.released && <p>{error.released}</p>}
        {error.rating && <p>{error.rating}</p>}
        {error.platforms && <p>{error.platforms}</p>}
        {error.generos && <p>{error.generos}</p>}
+       
 
-
-           <button disabled={!input.name.length ||error.name || error.description || error.released || error.rating || error.platforms || error.generos}>Crear!</button>
+    { !!input.name.length && !error.name && !error.description && !error.released && !error.rating && !error.platforms && !error.generos &&  <button className='buttonCreate' >Crear!</button>}
+      {form.error? <h2>{form.error}</h2>:null}
+      {form.success?<h2>{form.success}</h2>: null}
         </form>
         </div>
                 )

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as actions from '../../redux/actions/index'
 import {useDispatch} from "react-redux"
+import './Searchbar.css'
 
 function Searchbar(props){
     const [input, setInput]= React.useState("")
@@ -9,10 +10,12 @@ function Searchbar(props){
  function handlerChange(e){
      setInput(e.target.value)
  }
- function handlerClick(e){
-    if(input.length) dispatch(actions.getVideogames(input))
+ async function handlerClick(e){
+    if(input.length) await dispatch(actions.getVideogames(input))
+    props.currentPages()
+
  }
-    return(<div>
+    return(<div className='searchbar'>
           <input value={input} onChange={handlerChange}/>
           <button onClick={handlerClick}>BUSCAR!</button>
 

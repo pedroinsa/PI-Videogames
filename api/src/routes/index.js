@@ -17,19 +17,22 @@ router.get("/videogames", async (req,res)=>{
     try {
         const {name} = req.query
         if(!name){
-            res.json(await controller.mergeAll())
+            let array = await controller.mergeAll()
+            res.json(array)
         }else{
            const array = await controller.mergeAll()
-           res.status(201).json(controller.withQuery(array,name))
+           let respuesta = await controller.withQuery(array,name)
+           res.status(201).json(respuesta)
         }   
     } catch (error) {
-        res.status(404).json([])
+        res.status(404).json([{error: error.message}])
     }   
 })
 router.get("/videogame/:id", async(req,res)=>{
  try {
     const {id} = req.params
-   res.json(await controller.videogameID(id))
+    let respuesta = await controller.videogameID(id)
+   res.json(respuesta)
      
  } catch (error) {   
     res.status(400).json({error: error.message})
@@ -40,14 +43,16 @@ router.post("/videogames", async (req,res)=>{
  const {name,description,released,rating,platforms, generos} = req.body
  const objeto ={name,description,released,rating,platforms, generos}
  try {
-    res.json(await controller.postVideogames(objeto))    
+    let respuesta = await controller.postVideogames(objeto)
+    res.json(respuesta)    
  } catch (error) {
     res.status(400).json({error: error.message})
  }
 })
 router.get("/genres", async(req,res)=>{
   try {
-    res.json(await controller.getGenres())
+     let respuesta = await controller.getGenres()
+    res.json(respuesta)
   } catch (error) {
     res.status(400).json({error: error.message})
   }

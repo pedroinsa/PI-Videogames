@@ -28,6 +28,13 @@ const {
    let merge = [...array, ...db]
    return merge
 },  
+withQuery : (array,name)=>{
+    let filtrado= array.filter(element=> element.name.toLowerCase().includes(name.toLowerCase()))
+    const quince = filtrado.slice(0,15)
+    if(!filtrado.length) throw Error("No hay coincidencias")
+    return quince
+
+},
 videogameID: async (id)=>{
     let bypk
     let axiosReq
@@ -61,13 +68,15 @@ postVideogames: async({name,description,released,rating,platforms, generos})=>{
     if(typeof platforms !== "object" && !Array.isArray(platforms)) throw Error("platforms deber ser un array")
     if(typeof generos !== "object" && !Array.isArray(generos)) throw Error("generos deber ser un array")
     const obj = {name,description,released,rating,platforms}
-    const db = await Videogame.create(obj)
+    
+    const [db, created] = await Videogame.findOrCreate({where:{name}, defaults:{description,released,rating,platforms}})
+    if(!created) throw Error("El videogame ya existe!intentar con otro nombre")
     db.addGeneros(generos)
-    let aux = await Videogame.findByPk(db.id)
-    return aux
+   
+    return {success: "el videogame ha sido creado!"}
 },
 getGenres: async ()=>{
-    const getGenres = await axios("https://api.rawg.io/api/genres?key=427f786c4ce944fa906583a7f5705e9b")
+    const getGenres = await axios(`https://api.rawg.io/api/genres?key=${APIKEY}`)
   const data = getGenres.data.results
   const mapeo = data.map(element=> {
       const obj = {
@@ -78,13 +87,7 @@ getGenres: async ()=>{
   })
   await Genero.bulkCreate(mapeo)
   return mapeo
-},
-withQuery : (array,name)=>{
-    let filtrado= array.filter(element=> element.name.toLowerCase().includes(name.toLowerCase()))
-    const quince = filtrado.slice(0,15)
-    if(!filtrado.length) throw Error("No hay coincidencias")
-    return quince
-
 }
+
 
 }

@@ -23,33 +23,36 @@ function Home (props) {
  const currentVideogames = allVideogames.slice(indexFirst,indexLast)
  const paginado = (pageNumber)=>{ setCurrentPage(pageNumber)} 
  function handlerInput(e){
-    dispatch(actions.filterByOrigin(e.target.value))
+    if(e.target.value!=="placeholder")dispatch(actions.filterByOrigin(e.target.value))
     setCurrentPage(1)
 }
 function handlerInputGenre(e){
-    dispatch(actions.filterByGenre(e.target.value))
+    if(e.target.value!=="placeholder") dispatch(actions.filterByGenre(e.target.value))
     setCurrentPage(1)
 }
 function handlerInputOrder(e){
-    dispatch(actions.sortOfList(e.target.value))
+    if(e.target.value!=="placeholder")dispatch(actions.sortOfList(e.target.value))
     setCurrentPage(1)
     setOrder(`Order ${e.target.value}`)
+}
+function currentPages() {
+    setCurrentPage(1)
 }
 
  React.useEffect(async ()=>{
     await dispatch(actions.getAllVideogames())
     dispatch(actions.getPlatforms())
-    return ()=> dispatch(actions.cleanAll())
  },[])
 
 
     return (
         <div className='home'>
             <Navbar/>
-            <Searchbar/>
+            <Searchbar currentPages={currentPages}/>
             <div>
                 <label>Origen</label>
                 <select onChange={(e)=>handlerInput(e)}>
+                    <option value="placeholder">elige origen</option>
                     <option value="all">Todos</option>
                     <option value="Api">Videojuegos API</option>
                     <option value="createdInDb">Personalizados</option>
@@ -58,26 +61,41 @@ function handlerInputOrder(e){
                <div>
                 <label>Por genero</label>
                 <select onChange={(e)=> handlerInputGenre(e)}>
+                    <option value="placeholder">elige genero</option>
+                    <option value="all">All</option>
                 {allGenres && allGenres.map(x=> <option value={x.id}>{x.name}</option>)}
 
                 </select>
                 </div>
         
             <div>
-                <label>Alfabetico</label>
+                <label>Orden</label>
                 <select onChange={(e)=>handlerInputOrder(e)}>
+                    <option value="placeholder">elige orden</option>
                     <option value="indistinto">Indistinto </option>
                     <option value="Descendente">A-Z</option>
                     <option value="Ascendente">Z-A</option>
                     <option value ="Rating">Rating</option>
                 </select>
             </div>
+            <div>
+               <label >Por plataforma</label>
+               <option value="PC" >PC</option>
+               <option value="Linux">Linux</option>
+               <option value="iOS">iOS</option>
+               <option value="Xbox">Xbox</option>
+               <option value="Web">Web</option>
+
+            </div>
+
             {!allVideogames.length && <h2>Loading...</h2>}
            
+           
             <div className='videocards'>
-            {currentVideogames.length && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard key={x.id}  image={x.image} name={x.name} genres={x.generos}/></Link>)}
+               {allVideogames.length ===1 &&allVideogames[0].error && <h2>{allVideogames[0].error}</h2>} 
+            {!!currentVideogames.length && !allVideogames[0].error && currentVideogames.map(x=><Link to={`/videogame/${x.id}`}> <Videocard key={x.id} rating={x.rating}  image={x.image} name={x.name} genres={x.generos}/></Link>)}
             </div>
-            <Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>
+            {!!currentVideogames.length && !allVideogames[0].error &&<Paginado porPage={videogamesPerPage} videogames={allVideogames.length} paginado={paginado}/>}
            
         </div>
     )
