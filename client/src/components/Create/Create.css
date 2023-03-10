@@ -1,18 +1,20 @@
 .create {
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .buttonCreate {
-  background-color: white;
-  color: purple;
+  background-color: purple;
+  color: white;
   width: 10%;
   padding: 10px;
   font-size: 1.1rem;
   border-radius: 5%;
 }
 .buttonCreate:hover {
-  background-color: purple;
+  background-color: white;
+  color: rgb(218, 73, 97);
   color: white;
   cursor: pointer;
 }
@@ -23,4 +25,7 @@
 .createGenres {
   display: flex;
   justify-content: center;
+}
+.create label {
+  color: white;
 }

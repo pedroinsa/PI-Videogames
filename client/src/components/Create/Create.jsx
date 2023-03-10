@@ -56,7 +56,7 @@ if(!input.name.length){
  }
  return errores
 }
-return (<div className> 
+return (<div className='create'> 
         <Navbar/>
         <h1>CREA TU PROPIO VIDEOJUEGO!</h1>
         <form onSubmit={handlerSubmit} > 

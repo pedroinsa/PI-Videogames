@@ -19,6 +19,9 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn, Genero } = require('./src/db.js');
+const {
+ DB_PORT
+} = process.env; 
 
 const axios = require('axios')
 const {
@@ -26,7 +29,7 @@ const {
   } = process.env;
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(DB_PORT, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

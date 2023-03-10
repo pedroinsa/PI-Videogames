@@ -78,15 +78,7 @@ function currentPages() {
                     <option value ="Rating">Rating</option>
                 </select>
             </div>
-            <div>
-               <label >Por plataforma</label>
-               <option value="PC" >PC</option>
-               <option value="Linux">Linux</option>
-               <option value="iOS">iOS</option>
-               <option value="Xbox">Xbox</option>
-               <option value="Web">Web</option>
-
-            </div>
+       
 
             {!allVideogames.length && <h2>Loading...</h2>}
            
